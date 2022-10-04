@@ -1,19 +1,44 @@
+#Define the type of quarto project (new from .RMD)
 project:
-  type: website
-
+  type: website #Make sure to add `touch .nojekyll` in terminal to supress github jekyll auto 
+  output-dir: docs #Need to specify an output directory for Github pages (contains knitted html, pictures, etc.) 
+  render: #Specify what files to render (*) means all and (!) means not
+    - "*.qmd"
+    - "*.rmd"
+    - "!flexdashboard*" #This is a type of .rmd/.qmd that needs to be rendered separately due to it's on YAML
+    
+#Defines the main part(s) of the website: navbar, buttons, icons, links, etc.
 website:
-  title: "example.github.io"
+  title: "Solvejg Wastvedt"
   navbar:
+    type: default
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-
+      - text: "Home"
+        href: index.qmd
+      - text: "Resume"
+        href: resume.qmd
+      - text: "Recent Work"
+        menu:
+          - text: "Some Recent Work"
+            href: some_recent_work.qmd
+    right:
+      - icon: github
+        href: https://github.com/swastvedt/
+      - icon: linkedin
+        href: https://www.linkedin.com/in/solvejgwastvedt/
+      - icon: envelope
+        href: mailto:<your_email>
+        
+#Define output format, .css, and other basic style options
 format:
   html:
-    theme: cosmo
-    css: styles.css
-    toc: true
+    theme: lux #Kind of a cool theme & font
+    css: styles.css #Generated automatically, .css allows for more aesthetic control
+    toc: true #Table of contents
+    page-layout: full #This uses the full width of the page
 
-
+#Execution (warning, message, echo, eval, etc.)
+#Can define global options here like hide all code chunks
+execute:
+  echo: false
 
